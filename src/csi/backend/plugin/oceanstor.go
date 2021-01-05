@@ -2,12 +2,12 @@ package plugin
 
 import (
 	"errors"
-	"storage/oceanstor/client"
 	"strconv"
 	"strings"
-	"utils"
-	"utils/log"
-	"utils/pwd"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/oceanstor/client"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 const (
@@ -50,15 +50,10 @@ func (p *OceanstorPlugin) init(config map[string]interface{}, keepLogin bool) er
 		return errors.New("product only support config: V3, V5, Dorado")
 	}
 
-	decrypted, err := pwd.Decrypt(password)
-	if err != nil {
-		return err
-	}
-
 	vstoreName, _ := config["vstoreName"].(string)
 
-	cli := client.NewClient(urls, user, decrypted, vstoreName)
-	err = cli.Login()
+	cli := client.NewClient(urls, user, password, vstoreName)
+	err := cli.Login()
 	if err != nil {
 		return err
 	}
@@ -175,8 +170,7 @@ func (p *OceanstorPlugin) updatePoolCapabilities(poolNames []string, usageType s
 	for _, name := range poolNames {
 		if pool, exist := pools[name].(map[string]interface{}); exist {
 			poolType, exist := pool["NEWUSAGETYPE"].(string)
-			if (pool["USAGETYPE"] == usageType || pool["USAGETYPE"] == DORADO_V6_POOL_USAGE_TYPE) || (
-				exist && poolType == DORADO_V6_POOL_USAGE_TYPE) {
+			if (pool["USAGETYPE"] == usageType || pool["USAGETYPE"] == DORADO_V6_POOL_USAGE_TYPE) || (exist && poolType == DORADO_V6_POOL_USAGE_TYPE) {
 				validPools = append(validPools, pool)
 			} else {
 				log.Warningf("Pool %s is not for %s", name, usageType)
