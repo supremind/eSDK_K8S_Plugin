@@ -52,11 +52,13 @@ var (
 )
 
 type CSIConfig struct {
-	Backends []map[string]interface{} `json:"backends"`
+	Backends []map[string]interface{} `json:"backends" yaml:"backends"`
 }
 
 func init() {
+	logrus.Info("initializing huawei csi plugin")
 	_ = flag.Set("log_dir", "/var/log/huawei")
+	debug := flag.Bool("debug", false, "debug log")
 	flag.Parse()
 
 	data, err := ioutil.ReadFile(configFile)
@@ -73,6 +75,8 @@ func init() {
 		logrus.Fatalf("Must configure at least one backend")
 	}
 
+	logrus.Info("Configuration loaded", config)
+
 	if *containerized {
 		*controllerFlagFile = ""
 	}
@@ -88,13 +92,31 @@ func init() {
 
 	err = log.Init(map[string]string{
 		"logFilePrefix": logFilePrefix,
+		"logDebug": func() string {
+			if *debug {
+				return "true"
+			}
+			return "false"
+		}(),
 	})
 	if err != nil {
 		logrus.Fatalf("Init log error: %v", err)
 	}
+
+	logrus.Info("huawei csi plugin initialized")
 }
 
 func updateBackendCapabilities() {
+	defer func() {
+		if r := recover(); r != nil {
+			log.Errorf("Runtime error caught in updateBackendCapabilities routine: %v", r)
+			log.Errorf("%s", debug.Stack())
+		}
+
+		log.Flush()
+		log.Close()
+	}()
+
 	err := backend.SyncUpdateCapabilities()
 	if err != nil {
 		log.Fatalf("Update backend capabilities error: %v", err)
@@ -131,6 +153,7 @@ func main() {
 		}
 	}
 
+	log.Infof("initializing endpoint %s", *endpoint)
 	endpointDir := filepath.Dir(*endpoint)
 	_, err := os.Stat(endpointDir)
 	if err != nil && os.IsNotExist(err) {
@@ -143,6 +166,7 @@ func main() {
 		}
 	}
 
+	log.Infof("listening %s", *endpoint)
 	listener, err := net.Listen("unix", *endpoint)
 	if err != nil {
 		log.Fatalf("Listen on %s error: %v", *endpoint, err)
