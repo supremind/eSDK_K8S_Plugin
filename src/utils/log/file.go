@@ -73,7 +73,7 @@ func getNumInByte(maxDataNum string) (int64, error) {
 func copyFile(dstFile string, srcFile string) error {
 	cmd := fmt.Sprintf("cp %s %s", srcFile, dstFile)
 
-	shCmd := exec.Command("/bin/sh", "-c", cmd)
+	shCmd := exec.Command("/bin/bash", "-c", cmd)
 	output, err := shCmd.CombinedOutput()
 	if err != nil {
 		logrus.Errorf("Cannot dump log file %s to %s: %s", srcFile, dstFile, output)

@@ -47,7 +47,7 @@ func ExecShellCmd(format string, args ...interface{}) (string, error) {
 	cmd := fmt.Sprintf(format, args...)
 	log.Infof("Gonna run shell cmd \"%s\".", cmd)
 
-	shCmd := exec.Command("/bin/sh", "-c", cmd)
+	shCmd := exec.Command("/bin/bash", "-c", cmd)
 	output, err := shCmd.CombinedOutput()
 	if err != nil {
 		log.Warningf("Run shell cmd \"%s\" error: %s.", cmd, output)
