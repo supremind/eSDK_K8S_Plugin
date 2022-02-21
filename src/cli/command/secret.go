@@ -24,8 +24,8 @@ import (
 	"strings"
 	"sync"
 
-	"utils/log"
-	"utils/pwd"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/pwd"
 )
 
 func applySecret(secretExists bool) error {

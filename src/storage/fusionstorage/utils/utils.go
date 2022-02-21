@@ -19,13 +19,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"utils"
-	"utils/log"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 const (
-	softQuota = "softQuota"
-	hardQuota = "hardQuota"
+	softQuota         = "softQuota"
+	hardQuota         = "hardQuota"
 	delayDaysMinLimit = 0
 	delayDaysMaxLimit = 4294967294
 )

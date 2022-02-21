@@ -1,17 +1,17 @@
 package backend
 
 import (
-	"csi/backend/plugin"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/csi/backend/plugin"
 	"errors"
 	"fmt"
 	"math/rand"
 	"regexp"
-	fsUtils "storage/fusionstorage/utils"
+	fsUtils "github.com/Huawei/eSDK_K8S_Plugin/src/storage/fusionstorage/utils"
 	"strings"
 	"sync"
-	"utils"
-	"utils/k8sutils"
-	"utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/k8sutils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 const (

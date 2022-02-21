@@ -27,8 +27,8 @@ import (
 	"strings"
 	"time"
 
-	"utils"
-	"utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 func getDeviceLink(tgtLunGUID string) (string, error) {
@@ -379,7 +379,7 @@ func removeSCSISymlinks(devices []string) error {
 
 		err = removeSymlinks(devices, realPath, link)
 		if err != nil {
-			return  err
+			return err
 		}
 	}
 
@@ -757,12 +757,12 @@ func getDeviceInfo(dev string) map[string]string {
 			continue
 		}
 
-		devInfo := map[string]string {
-			"device": device,
-			"host": hostChannelInfo[0],
+		devInfo := map[string]string{
+			"device":  device,
+			"host":    hostChannelInfo[0],
 			"channel": hostChannelInfo[1],
-			"id": hostChannelInfo[2],
-			"lun": hostChannelInfo[3],
+			"id":      hostChannelInfo[2],
+			"lun":     hostChannelInfo[3],
 		}
 		return devInfo
 	}

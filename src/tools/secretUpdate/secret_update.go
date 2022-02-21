@@ -15,7 +15,7 @@
 package main
 
 import (
-	cmd "cli/command"
+	cmd "github.com/Huawei/eSDK_K8S_Plugin/src/cli/command"
 )
 
 func main() {

@@ -3,11 +3,12 @@ package volume
 import (
 	"errors"
 	"fmt"
-	"storage/oceanstor/client"
-	"storage/oceanstor/smartx"
 	"strconv"
-	"utils"
-	"utils/log"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/oceanstor/client"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/oceanstor/smartx"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 const (
@@ -269,8 +270,8 @@ func (p *Base) prepareVolObj(params, res map[string]interface{}) utils.Volume {
 
 	volObj := utils.NewVolume(volName)
 
-	if res != nil{
-		if lunWWN, ok := res["lunWWN"].(string); ok{
+	if res != nil {
+		if lunWWN, ok := res["lunWWN"].(string); ok {
 			volObj.SetLunWWN(lunWWN)
 		}
 	}

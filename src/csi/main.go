@@ -1,8 +1,6 @@
 package main
 
 import (
-	"csi/backend"
-	"csi/driver"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -12,9 +10,12 @@ import (
 	"path/filepath"
 	"runtime/debug"
 	"time"
-	"utils"
-	"utils/k8sutils"
-	"utils/log"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/csi/backend"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/csi/driver"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/k8sutils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 
 	"github.com/container-storage-interface/spec/lib/go/csi"
 	"github.com/sirupsen/logrus"
@@ -74,7 +75,7 @@ var (
 )
 
 type CSIConfig struct {
-	Backends []map[string]interface{} `json:"backends"`
+	Backends []map[string]interface{} `json:"backends" yaml:"backends"`
 }
 
 type CSISecret struct {
@@ -115,6 +116,7 @@ func parseConfig() {
 	if "" == *nodeName && !*controller {
 		log.Warningln("Node name is empty. Topology aware volume provisioning feature may not behave normal")
 	}
+	logrus.Info("Configuration loaded", config)
 }
 
 func getSecret(backendSecret, backendConfig map[string]interface{}, secretKey string) {
@@ -142,6 +144,15 @@ func mergeData(config CSIConfig, secret CSISecret) error {
 }
 
 func updateBackendCapabilities() {
+	defer func() {
+		if r := recover(); r != nil {
+			log.Errorf("Runtime error caught in updateBackendCapabilities routine: %v", r)
+			log.Errorf("%s", debug.Stack())
+		}
+		log.Flush()
+		log.Close()
+	}()
+
 	err := backend.SyncUpdateCapabilities()
 	if err != nil {
 		raisePanic("Update backend capabilities error: %v", err)
@@ -188,6 +199,7 @@ func raisePanic(format string, args ...interface{}) {
 }
 
 func main() {
+	logrus.Info("initializing huawei csi plugin")
 	// parse command line flags
 	flag.Parse()
 
@@ -208,6 +220,7 @@ func main() {
 
 	// parse configurations
 	parseConfig()
+
 	err = backend.RegisterBackend(config.Backends, keepLogin, *driverName)
 	if err != nil {
 		raisePanic("Register backends error: %v", err)
@@ -216,6 +229,7 @@ func main() {
 		go updateBackendCapabilities()
 	}
 
+	log.Infof("initializing endpoint %s", *endpoint)
 	endpointDir := filepath.Dir(*endpoint)
 	_, err = os.Stat(endpointDir)
 	if err != nil && os.IsNotExist(err) {
@@ -242,6 +256,7 @@ func main() {
 }
 
 func registerServer(k8sUtils k8sutils.Interface) {
+	log.Infof("listening %s", *endpoint)
 	listener, err := net.Listen("unix", *endpoint)
 	if err != nil {
 		raisePanic("Listen on %s error: %v", *endpoint, err)

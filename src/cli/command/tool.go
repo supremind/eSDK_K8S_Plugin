@@ -26,13 +26,13 @@ import (
 	"strings"
 	"time"
 
-	k8sClient "cli/client"
-	"utils"
-	"utils/log"
-	"utils/pwd"
+	k8sClient "github.com/Huawei/eSDK_K8S_Plugin/src/cli/client"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/pwd"
 
-	fusionstorageClient "storage/fusionstorage/client"
-	oceanstorClient "storage/oceanstor/client"
+	fusionstorageClient "github.com/Huawei/eSDK_K8S_Plugin/src/storage/fusionstorage/client"
+	oceanstorClient "github.com/Huawei/eSDK_K8S_Plugin/src/storage/oceanstor/client"
 )
 
 const (

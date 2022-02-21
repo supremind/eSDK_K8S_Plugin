@@ -15,14 +15,14 @@
 package main
 
 import (
-	"csi/backend"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/csi/backend"
 	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
-	"utils"
-	"utils/k8sutils"
-	"utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/k8sutils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 const (

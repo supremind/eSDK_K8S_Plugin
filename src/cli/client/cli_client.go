@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"cli/config"
-	"cli/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/cli/config"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/cli/utils"
 
 	"github.com/cenkalti/backoff"
 	log "github.com/sirupsen/logrus"

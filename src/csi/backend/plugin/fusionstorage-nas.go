@@ -3,15 +3,15 @@ package plugin
 import (
 	"errors"
 	"fmt"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 	"net"
-	"storage/fusionstorage/volume"
-	"utils"
-	"utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/fusionstorage/volume"
 )
 
 type FusionStorageNasPlugin struct {
 	FusionStoragePlugin
-	portal   string
+	portal string
 }
 
 func init() {

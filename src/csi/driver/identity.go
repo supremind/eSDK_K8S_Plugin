@@ -2,7 +2,7 @@ package driver
 
 import (
 	"context"
-	"utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 
 	"github.com/container-storage-interface/spec/lib/go/csi"
 )

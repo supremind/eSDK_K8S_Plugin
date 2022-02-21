@@ -22,14 +22,14 @@ import (
 	"strings"
 	"sync"
 
-	"connector"
-	"proto"
-	"storage/fusionstorage/attacher"
-	"storage/fusionstorage/client"
-	"storage/fusionstorage/volume"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/connector"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/proto"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/fusionstorage/attacher"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/fusionstorage/client"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/fusionstorage/volume"
 
-	"utils"
-	"utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 type FusionStorageSanPlugin struct {

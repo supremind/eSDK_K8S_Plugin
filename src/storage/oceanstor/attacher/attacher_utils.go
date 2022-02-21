@@ -4,12 +4,12 @@ import (
 	"errors"
 	"fmt"
 
-	"connector"
-	_ "connector/fibrechannel"
-	_ "connector/iscsi"
-	_ "connector/nvme"
-	_ "connector/roce"
-	"utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/connector"
+	_ "github.com/Huawei/eSDK_K8S_Plugin/src/connector/fibrechannel"
+	_ "github.com/Huawei/eSDK_K8S_Plugin/src/connector/iscsi"
+	_ "github.com/Huawei/eSDK_K8S_Plugin/src/connector/nvme"
+	_ "github.com/Huawei/eSDK_K8S_Plugin/src/connector/roce"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 func disConnectVolume(tgtLunWWN, protocol string) (*connector.DisConnectInfo, error) {

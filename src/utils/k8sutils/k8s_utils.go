@@ -22,12 +22,12 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
-	"utils/log"
 )
 
 const (
@@ -37,7 +37,7 @@ const (
 	ProtocolTopologyPrefix = TopologyPrefix + "/protocol."
 	topologyRegx           = TopologyPrefix + "/.*"
 	// Interval (in miliseconds) between pod get retry with k8s
-	podRetryInterval          = 10
+	podRetryInterval = 10
 )
 
 // Interface is a kubernetes utility interface required by CSI plugin to interact with Kubernetes
@@ -50,7 +50,6 @@ type Interface interface {
 
 	// GetVolumeAttributes returns volume attributes of PV
 	GetVolumeAttributes(pvName string) (map[string]string, error)
-
 }
 
 type kubeClient struct {

@@ -1,12 +1,12 @@
 package plugin
 
 import (
-	"connector"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/connector"
 	// init the nfs connector
-	_ "connector/nfs"
 	"errors"
-	"utils"
-	"utils/log"
+	_ "github.com/Huawei/eSDK_K8S_Plugin/src/connector/nfs"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 type Plugin interface {

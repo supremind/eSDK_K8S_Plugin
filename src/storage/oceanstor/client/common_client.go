@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 func (cli *Client) getResponseDataMap(data interface{}) (map[string]interface{}, error) {
