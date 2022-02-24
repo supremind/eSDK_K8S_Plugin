@@ -29,7 +29,6 @@ import (
 	k8sClient "cli/client"
 	"utils"
 	"utils/log"
-	"utils/pwd"
 
 	fusionstorageClient "storage/fusionstorage/client"
 	oceanstorClient "storage/oceanstor/client"
@@ -99,12 +98,6 @@ func safeExit() {
 func getBackendSecretMap(nameToAccountMap map[string]backendAccount) (map[string]string, error) {
 	secretMap := make(map[string]string)
 	for backendName, account := range nameToAccountMap {
-		encrypted, err := pwd.Encrypt(account.Password, account.KeyText)
-		if err != nil {
-			return nil, fmt.Errorf("encrypt storage %s error: %v", backendName, err)
-		}
-
-		account.Password = encrypted
 		secretBytes, err := json.Marshal(account)
 		if err != nil {
 			return nil, fmt.Errorf("marshal secret info failed, error: %v", err)

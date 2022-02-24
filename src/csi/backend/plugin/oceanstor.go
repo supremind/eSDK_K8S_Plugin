@@ -8,7 +8,6 @@ import (
 	"strings"
 	"utils"
 	"utils/log"
-	"utils/pwd"
 )
 
 const (
@@ -43,21 +42,16 @@ func (p *OceanstorPlugin) init(config map[string]interface{}, keepLogin bool) er
 		return errors.New("password must be provided")
 	}
 
-	keyText, exist := config["keyText"].(string)
-	if !exist {
-		return errors.New("keyText must be provided")
-	}
-
-	decrypted, err := pwd.Decrypt(password, keyText)
-	if err != nil {
-		return err
-	}
+	// keyText, exist := config["keyText"].(string)
+	// if !exist {
+	// 	return errors.New("keyText must be provided")
+	// }
 
 	vstoreName, _ := config["vstoreName"].(string)
 	parallelNum, _ := config["parallelNum"].(string)
 
-	cli := client.NewClient(urls, user, decrypted, vstoreName, parallelNum)
-	err = cli.Login()
+	cli := client.NewClient(urls, user, password, vstoreName, parallelNum)
+	err := cli.Login()
 	if err != nil {
 		return err
 	}
