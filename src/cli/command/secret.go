@@ -25,7 +25,6 @@ import (
 	"sync"
 
 	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
-	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/pwd"
 )
 
 func applySecret(secretExists bool) error {
@@ -245,11 +244,6 @@ func updateStatusOfBackends(backends []backendConfigStatus,
 			}()
 
 			var err error
-			account.Password, err = pwd.Decrypt(account.Password, account.KeyText)
-			if err != nil {
-				log.Errorf("decrypt storage %s error: %v", backend.Name, err)
-				return
-			}
 
 			err = verifyingAccountValidity(backend, account)
 			if err != nil {
