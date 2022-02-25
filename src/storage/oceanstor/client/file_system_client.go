@@ -21,7 +21,7 @@ import (
 	"strconv"
 	"time"
 
-	"utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 // CreateFileSystem to create file system on enterprise storage

@@ -16,12 +16,13 @@
 package nfs
 
 import (
-	"connector"
 	"errors"
 	"fmt"
 	"sync"
 	"time"
-	"utils/log"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/connector"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 // NFS to define a local lock when connect or disconnect, in order to preventing mounting and unmounting confusion

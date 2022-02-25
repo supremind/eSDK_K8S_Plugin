@@ -15,14 +15,14 @@
 package main
 
 import (
-	"csi/backend"
 	"encoding/json"
 	"fmt"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/csi/backend"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/k8sutils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 	"os"
 	"path/filepath"
-	"utils"
-	"utils/k8sutils"
-	"utils/log"
 )
 
 const (
@@ -128,8 +128,8 @@ func getNodeVolumes(kubeletRootDir string, driverName string) ([]NodePVData, err
 		}
 		pvName := filepath.Base(targetDirPath)
 		nodePV := NodePVData{
-			VolumeHandle:pvFileData.VolumeHandle,
-			VolumeName:pvName,
+			VolumeHandle: pvFileData.VolumeHandle,
+			VolumeName:   pvName,
 		}
 		nodePVs = append(nodePVs, nodePV)
 
@@ -199,7 +199,7 @@ func checkAndClearStaleDevices(k8sUtils k8sutils.Interface, k8sVolumes map[strin
 		}(nodePV.VolumeHandle, lunWWN)
 	}
 
-	for i:=0; i<staleVolumesCnt; i++ {
+	for i := 0; i < staleVolumesCnt; i++ {
 		<-staleDeviceCleanupChan
 	}
 

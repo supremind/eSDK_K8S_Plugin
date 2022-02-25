@@ -2,7 +2,7 @@ package driver
 
 import (
 	"strings"
-	"utils/k8sutils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/k8sutils"
 )
 
 type Driver struct {

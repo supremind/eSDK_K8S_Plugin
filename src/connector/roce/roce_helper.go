@@ -1,7 +1,6 @@
 package roce
 
 import (
-	"connector"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -12,8 +11,10 @@ import (
 	"strings"
 	"sync"
 	"time"
-	"utils"
-	"utils/log"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/connector"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 type connectorInfo struct {
@@ -22,13 +23,14 @@ type connectorInfo struct {
 }
 
 type shareData struct {
-	stopConnecting bool
-	numLogin       int64
-	failedLogin    int64
-	stoppedThreads int64
-	foundDevices   []string
+	stopConnecting   bool
+	numLogin         int64
+	failedLogin      int64
+	stoppedThreads   int64
+	foundDevices     []string
 	justAddedDevices []string
 }
+
 const sleepInternal = 2
 
 func getNVMeInfo(connectionProperties map[string]interface{}) (*connectorInfo, error) {
@@ -612,7 +614,7 @@ func disconnectSessions(devPaths []string) error {
 		}
 
 		nvmePort := fmt.Sprintf("n%s", splitS[1])
-		cmd := fmt.Sprintf("ls /sys/devices/virtual/nvme-fabrics/ctl/%s/ |grep nvme |wc -l |awk " +
+		cmd := fmt.Sprintf("ls /sys/devices/virtual/nvme-fabrics/ctl/%s/ |grep nvme |wc -l |awk "+
 			"'{if($1>1) print 1; else print 0}'", nvmePort)
 		output, err := utils.ExecShellCmd(cmd)
 		if err != nil {
