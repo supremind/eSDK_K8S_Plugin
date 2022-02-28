@@ -16,7 +16,6 @@
 package nfs
 
 import (
-	"connector"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -25,16 +24,18 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
-	"utils"
-	"utils/log"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/connector"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 type connectorInfo struct {
-	srcType     string
-	sourcePath  string
-	targetPath  string
-	fsType      string
-	mntFlags    string
+	srcType    string
+	sourcePath string
+	targetPath string
+	fsType     string
+	mntFlags   string
 }
 
 func parseNFSInfo(connectionProperties map[string]interface{}) (*connectorInfo, error) {
@@ -288,9 +289,9 @@ func getDiskSizeType(sourcePath string) (string, error) {
 	if size <= halfTiSizeBytes {
 		return "default", nil
 	} else if size > halfTiSizeBytes && size <= oneTiSizeBytes {
-		return  "big", nil
+		return "big", nil
 	} else if size > oneTiSizeBytes && size <= tenTiSizeBytes {
-		return  "huge", nil
+		return "huge", nil
 	} else if size > tenTiSizeBytes && size <= hundredTiSizeBytes {
 		return "large", nil
 	} else if size > hundredTiSizeBytes && size <= halfPiSizeBytes {
@@ -387,7 +388,7 @@ func removeTargetPath(targetPath string) error {
 }
 
 func tryDisConnectVolume(targetPath string) error {
-	err :=  unmountUnix(targetPath)
+	err := unmountUnix(targetPath)
 	if err != nil {
 		return err
 	}

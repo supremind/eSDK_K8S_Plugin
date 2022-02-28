@@ -1,9 +1,11 @@
 package iscsi
 
 import (
-	"connector"
 	"errors"
 	"fmt"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/connector"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 	"io/ioutil"
 	"math"
 	"path/filepath"
@@ -12,8 +14,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-	"utils"
-	"utils/log"
 )
 
 type chapInfo struct {
@@ -78,8 +78,7 @@ func parseISCSIInfo(connectionProperties map[string]interface{}) (*connectorInfo
 		return nil, errors.New(msg)
 	}
 
-	if (tgtIQNs == nil || tgtHostLUNs == nil) || (
-		len(tgtPortals) != len(tgtIQNs) || len(tgtPortals) != len(tgtHostLUNs)) {
+	if (tgtIQNs == nil || tgtHostLUNs == nil) || (len(tgtPortals) != len(tgtIQNs) || len(tgtPortals) != len(tgtHostLUNs)) {
 		msg := "the numbers of tgtPortals, targetIQNs and tgtHostLUNs are not equal"
 		log.Errorln(msg)
 		return nil, errors.New(msg)
@@ -658,7 +657,7 @@ func disconnectSessions(devConnectorInfos []singleConnectorInfo) error {
 	for _, connectorInfo := range devConnectorInfos {
 		tgtPortal := connectorInfo.tgtPortal
 		tgtIQN := connectorInfo.tgtIQN
-		cmd := fmt.Sprintf("ls /dev/disk/by-path/ |grep -w %s |grep -w %s |wc -l |awk '{if($1>0) print 1; " +
+		cmd := fmt.Sprintf("ls /dev/disk/by-path/ |grep -w %s |grep -w %s |wc -l |awk '{if($1>0) print 1; "+
 			"else print 0}'", tgtPortal, utils.MaskSensitiveInfo(tgtIQN))
 		output, err := utils.ExecShellCmd(cmd)
 		if err != nil {

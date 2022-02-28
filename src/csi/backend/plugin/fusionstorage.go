@@ -2,11 +2,11 @@ package plugin
 
 import (
 	"errors"
-	"storage/fusionstorage/client"
 	"strings"
-	"utils"
-	"utils/log"
-	"utils/pwd"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/fusionstorage/client"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 const (
@@ -37,19 +37,9 @@ func (p *FusionStoragePlugin) init(config map[string]interface{}, keepLogin bool
 		return errors.New("password must be provided")
 	}
 
-	keyText, exist := config["keyText"].(string)
-	if !exist {
-		return errors.New("keyText must be provided")
-	}
-
-	decrypted, err := pwd.Decrypt(password, keyText)
-	if err != nil {
-		return err
-	}
-
 	parallelNum, _ := config["parallelNum"].(string)
-	cli := client.NewClient(url, user, decrypted, parallelNum)
-	err = cli.Login()
+	cli := client.NewClient(url, user, password, parallelNum)
+	err := cli.Login()
 	if err != nil {
 		return err
 	}

@@ -1,22 +1,22 @@
 package roce
 
 import (
-	"connector"
 	"errors"
 	"fmt"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/connector"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 	"strings"
 	"sync"
 	"time"
-	"utils/log"
 )
 
-type RoCE struct{
+type RoCE struct {
 	mutex sync.Mutex
 }
 
 const (
-	intNumTwo             = 2
-	intNumThree           = 3
+	intNumTwo   = 2
+	intNumThree = 3
 )
 
 func init() {

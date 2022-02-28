@@ -4,13 +4,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"storage/oceanstor/client"
-	"storage/oceanstor/smartx"
 	"strconv"
 	"time"
-	"utils"
-	"utils/log"
-	"utils/taskflow"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/oceanstor/client"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/oceanstor/smartx"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/taskflow"
 )
 
 const (
@@ -257,7 +258,7 @@ func (p *SAN) createLocalLun(params, taskResult map[string]interface{}) (map[str
 
 	return map[string]interface{}{
 		"localLunID": lun["ID"].(string),
-		"lunWWN": lun["WWN"].(string),
+		"lunWWN":     lun["WWN"].(string),
 	}, nil
 }
 

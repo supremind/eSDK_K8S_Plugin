@@ -27,7 +27,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	"utils/log"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 
 	"github.com/container-storage-interface/spec/lib/go/csi"
 	"golang.org/x/sys/unix"
@@ -130,7 +131,7 @@ func execShellCmd(format string, logFilter bool, args ...interface{}) (string, b
 	cmd := fmt.Sprintf(format, args...)
 	log.Infof("Gonna run shell cmd \"%s\".", MaskSensitiveInfo(cmd))
 
-	execCmd := []string{"-i/proc/1/ns/ipc", "-m/proc/1/ns/mnt", "-n/proc/1/ns/net", "/bin/sh", "-c", cmd}
+	execCmd := []string{"-i/proc/1/ns/ipc", "-m/proc/1/ns/mnt", "-n/proc/1/ns/net", "/bin/bash", "-c", cmd}
 	shCmd := exec.Command("nsenter", execCmd...)
 	var timeOut bool
 	if strings.Contains(cmd, "mkfs") || strings.Contains(cmd, "resize2fs") {
@@ -319,7 +320,7 @@ func CopyMap(srcMap interface{}) map[string]interface{} {
 func StrToBool(str string) bool {
 	b, err := strconv.ParseBool(str)
 	if err != nil {
-		log.Warningf("Parse bool string %s error, return false")
+		log.Warningf("Parse bool string %s error, return false", err)
 		return false
 	}
 

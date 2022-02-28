@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 func (cli *Client) getResponseDataMap(data interface{}) (map[string]interface{}, error) {
@@ -46,7 +46,7 @@ func (cli *Client) getCountFromResponse(data interface{}) (int64, error) {
 	}
 
 	countStr, ok := respData["COUNT"].(string)
-	if !ok  {
+	if !ok {
 		msg := fmt.Sprintf("The COUNT is not in respData %v", respData)
 		log.Errorln(msg)
 		return 0, errors.New(msg)

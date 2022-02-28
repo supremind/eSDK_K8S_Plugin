@@ -2,13 +2,14 @@ package plugin
 
 import (
 	"errors"
-	"storage/oceanstor/client"
-	"storage/oceanstor/smartx"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/oceanstor/client"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/oceanstor/smartx"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
+
 	"strconv"
 	"strings"
-	"utils"
-	"utils/log"
-	"utils/pwd"
 )
 
 const (
@@ -43,21 +44,11 @@ func (p *OceanstorPlugin) init(config map[string]interface{}, keepLogin bool) er
 		return errors.New("password must be provided")
 	}
 
-	keyText, exist := config["keyText"].(string)
-	if !exist {
-		return errors.New("keyText must be provided")
-	}
-
-	decrypted, err := pwd.Decrypt(password, keyText)
-	if err != nil {
-		return err
-	}
-
 	vstoreName, _ := config["vstoreName"].(string)
 	parallelNum, _ := config["parallelNum"].(string)
 
-	cli := client.NewClient(urls, user, decrypted, vstoreName, parallelNum)
-	err = cli.Login()
+	cli := client.NewClient(urls, user, password, vstoreName, parallelNum)
+	err := cli.Login()
 	if err != nil {
 		return err
 	}

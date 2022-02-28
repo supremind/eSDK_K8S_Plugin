@@ -8,9 +8,9 @@ import (
 
 	logging "github.com/sirupsen/logrus"
 
-	k8sClient "cli/client"
-	"cli/utils"
-	"utils/log"
+	k8sClient "github.com/Huawei/eSDK_K8S_Plugin/src/cli/client"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/cli/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 const (
