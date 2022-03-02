@@ -108,7 +108,7 @@ type Client struct {
 	client     *http.Client
 	vstoreName string
 
-	reloginMutex sync.Mutex
+	reloginMutex *sync.Mutex
 }
 
 type Response struct {

@@ -65,7 +65,7 @@ type Client struct {
 	authToken string
 	client    *http.Client
 
-	reloginMutex sync.Mutex
+	reloginMutex *sync.Mutex
 }
 
 func NewClient(url, user, password, parallelNum string) *Client {
