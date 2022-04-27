@@ -16,13 +16,13 @@
 package local
 
 import (
-	"connector"
 	"fmt"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/connector"
 	"strings"
 	"time"
 
-	"utils"
-	"utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 func waitDevOnline(tgtLunWWN string) string {

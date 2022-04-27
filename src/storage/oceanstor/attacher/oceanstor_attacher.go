@@ -1,10 +1,10 @@
 package attacher
 
 import (
-	"connector"
-	"storage/oceanstor/client"
-	"utils"
-	"utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/connector"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/oceanstor/client"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 type OceanStorAttacher struct {

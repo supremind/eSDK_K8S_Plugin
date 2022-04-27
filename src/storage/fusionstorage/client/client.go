@@ -13,8 +13,9 @@ import (
 	"strconv"
 	"sync"
 	"time"
-	"utils"
-	"utils/log"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 
 	fusionURL "net/url"
 )
@@ -64,7 +65,7 @@ type Client struct {
 	authToken string
 	client    *http.Client
 
-	reloginMutex sync.Mutex
+	reloginMutex *sync.Mutex
 }
 
 func NewClient(url, user, password, parallelNum string) *Client {

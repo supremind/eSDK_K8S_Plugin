@@ -1,13 +1,16 @@
 package fibrechannel
 
 import (
-	"connector"
 	"errors"
 	"fmt"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/connector"
+
 	"strings"
 	"sync"
 	"time"
-	"utils/log"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 type FibreChannel struct {

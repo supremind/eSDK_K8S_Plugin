@@ -3,10 +3,10 @@ package plugin
 import (
 	"errors"
 	"fmt"
-	"storage/oceanstor/client"
-	"storage/oceanstor/volume"
-	"utils"
-	"utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/oceanstor/client"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/oceanstor/volume"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 const (
@@ -226,4 +226,3 @@ func (p *OceanstorNasPlugin) updateReplicationCapability(capabilities map[string
 	}
 	return nil
 }
-

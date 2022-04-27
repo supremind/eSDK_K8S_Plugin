@@ -3,13 +3,14 @@ package volume
 import (
 	"errors"
 	"fmt"
-	"storage/fusionstorage/client"
-	fsUtils "storage/fusionstorage/utils"
 	"strconv"
 	"time"
-	"utils"
-	"utils/log"
-	"utils/taskflow"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/fusionstorage/client"
+	fsUtils "github.com/Huawei/eSDK_K8S_Plugin/src/storage/fusionstorage/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/taskflow"
 )
 
 const (
@@ -97,7 +98,6 @@ func (p *NAS) Create(params map[string]interface{}) (utils.Volume, error) {
 	return volObj, nil
 }
 
-
 func (p *NAS) prepareVolObj(params map[string]interface{}) utils.Volume {
 	volName, isStr := params["name"].(string)
 	if !isStr {
@@ -106,7 +106,6 @@ func (p *NAS) prepareVolObj(params map[string]interface{}) utils.Volume {
 	}
 	return utils.NewVolume(volName)
 }
-
 
 func (p *NAS) createFS(params, taskResult map[string]interface{}) (map[string]interface{}, error) {
 	fsName, ok := params["name"].(string)

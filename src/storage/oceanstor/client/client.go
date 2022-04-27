@@ -16,8 +16,9 @@ import (
 	"strings"
 	"sync"
 	"time"
-	"utils"
-	"utils/log"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 const (
@@ -107,7 +108,7 @@ type Client struct {
 	client     *http.Client
 	vstoreName string
 
-	reloginMutex sync.Mutex
+	reloginMutex *sync.Mutex
 }
 
 type Response struct {
@@ -1680,8 +1681,8 @@ func (cli *Client) CreateQos(name, objID, objType string, params map[string]int)
 	}
 
 	days := time.Unix(utcTime, 0).Format("2006-01-02")
-	utcZeroTime, err  := time.ParseInLocation("2006-01-02", days, time.UTC)
-	if err !=nil {
+	utcZeroTime, err := time.ParseInLocation("2006-01-02", days, time.UTC)
+	if err != nil {
 		return nil, err
 	}
 

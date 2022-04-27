@@ -3,12 +3,15 @@ package volume
 import (
 	"errors"
 	"fmt"
-	"storage/fusionstorage/client"
-	"storage/fusionstorage/smartx"
 	"strconv"
-	"utils"
-	"utils/log"
-	"utils/taskflow"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/taskflow"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/fusionstorage/client"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/fusionstorage/smartx"
 )
 
 const (
@@ -100,7 +103,7 @@ func (p *SAN) prepareVolObj(params, res map[string]interface{}) utils.Volume {
 
 	volObj := utils.NewVolume(volName)
 
-	if lunWWN, ok := res["lunWWN"].(string); ok{
+	if lunWWN, ok := res["lunWWN"].(string); ok {
 		volObj.SetLunWWN(lunWWN)
 	}
 

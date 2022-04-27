@@ -16,13 +16,13 @@
 package local
 
 import (
-	"connector"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/connector"
 	"errors"
 	"fmt"
 	"time"
 
 	"sync"
-	"utils/log"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 // Local to define a local lock when connect or disconnect, in order to preventing connect and disconnect confusion

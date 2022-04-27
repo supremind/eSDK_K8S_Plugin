@@ -5,11 +5,12 @@ import (
 	"errors"
 	"fmt"
 	"math/big"
-	"storage/oceanstor/client"
 	"strings"
 	"time"
-	"utils"
-	"utils/log"
+
+	"github.com/Huawei/eSDK_K8S_Plugin/src/storage/oceanstor/client"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils"
+	"github.com/Huawei/eSDK_K8S_Plugin/src/utils/log"
 )
 
 type qosParameterValidators map[string]func(int) bool
